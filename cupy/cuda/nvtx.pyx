@@ -6,7 +6,7 @@ Wrapper for NVIDIA Tools Extension Library (NVTX)
 """
 from libc cimport string
 
-cdef extern from "cupy_cuda.h":
+cdef extern from "cupy_cuda.h" nogil:
     cdef int NVTX_VERSION
     cdef enum nvtxColorType_t:
         NVTX_COLOR_UNKNOWN
@@ -43,11 +43,11 @@ cdef extern from "cupy_cuda.h":
         int32_t    messageType
         message_t  message
     ctypedef nvtxEventAttributes_v1 nvtxEventAttributes_t
-    void nvtxMarkA(const char *message) nogil
-    void nvtxMarkEx(const nvtxEventAttributes_t *eventAttrib) nogil
-    int nvtxRangePushA(const char *message) nogil
-    int nvtxRangePushEx(const nvtxEventAttributes_t *eventAttrib) nogil
-    int nvtxRangePop() nogil
+    void nvtxMarkA(const char *message)
+    void nvtxMarkEx(const nvtxEventAttributes_t *eventAttrib)
+    int nvtxRangePushA(const char *message)
+    int nvtxRangePushEx(const nvtxEventAttributes_t *eventAttrib)
+    int nvtxRangePop()
 
 cdef int num_colors = 10
 cdef uint32_t colors[10]
